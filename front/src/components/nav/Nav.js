@@ -11,7 +11,7 @@ function Nav() {
         <nav className="bg-gray-800 p-4">
             <div className="max-w-7xl mx-auto flex items-center justify-between">
                 <Link to="/" className="text-white text-lg font-bold">
-                    HelpRequest APP
+                    GoodNeighbour
                 </Link>
                 <div className="md:hidden">
                     <button
@@ -66,7 +66,9 @@ function Nav() {
                     ) : (
                         <>
                             <button
-                                onClick={() => console.log('Open login/register popup')}
+                                onClick={() =>
+                                    console.log('Open login/register popup')
+                                }
                                 className="text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium"
                             >
                                 Login/Register
@@ -107,7 +109,9 @@ function Nav() {
                     ) : (
                         <>
                             <button
-                                onClick={() => console.log('Open login/register popup')}
+                                onClick={() =>
+                                    console.log('Open login/register popup')
+                                }
                                 className="text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium"
                             >
                                 Login/Register
