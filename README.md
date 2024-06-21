@@ -1,4 +1,4 @@
-# GoodNeighbour
+# GoodNeighbour 💗
 
 GoodNeighbour is a neighbourhood platform that facilitates exchanged acts of kindness.
 
