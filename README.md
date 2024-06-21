@@ -160,7 +160,7 @@ I would like to acknowledge the following open-source projects for their contrib
 
 ### Icons
 
--   [Twemoji](https://github.com/twitter/twemoji): Utilized the bike emoji for the favicon.ico
+-   [Twemoji](https://github.com/twitter/twemoji): Utilized the growing heart emoji for the favicon.ico
 
 ### Google Maps
 
