@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../auth_context/AuthContext'; // Import the AuthContext
+import { AuthContext } from '../auth_context/AuthContext';
 
 function Nav() {
-    const { isLoggedIn } = useContext(AuthContext); // Access isLoggedIn from AuthContext
+    const { isLoggedIn } = useContext(AuthContext);
 
     const [isOpen, setIsOpen] = useState(false);
 
