@@ -83,9 +83,9 @@ Ensure you have the following environment variables set in `config/.env` files i
 
 ## Models
 
--   **messages**: - represents
--   **requests**: - represents
--   **users**: - represents
+-   **messages**: - Stores information about messages sent and received on the app.
+-   **requests**: - Stores information about the aid requests.
+-   **users**: - Stores information about site users.
 
 ## Database Schema
 
