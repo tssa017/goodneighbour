@@ -3,14 +3,20 @@
 class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
-    self.resource = warden.authenticate!(auth_options)
-    sign_in(resource_name, resource)
-    
-    # Custom logic to respond with JSON for React frontend
-    render json: {
-      status: { code: 200, message: 'Logged in successfully.' },
-      data: UserSerializer.new(resource).serializable_hash[:data][:attributes]
-    }, status: :ok
+    user = User.find_by(email: params[:email])
+
+    if user && user.valid_password?(params[:password])
+      sign_in(user)
+      render json: {
+        status: 'success',
+        data: user
+      }, status: :ok
+    else
+      render json: {
+        status: 'error',
+        message: 'Invalid email or password'
+      }, status: :unauthorized
+    end
   end
 
   # DELETE /resource/sign_out

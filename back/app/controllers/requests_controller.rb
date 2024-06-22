@@ -11,7 +11,7 @@ class RequestsController < ApplicationController
     if @request.save
       render json: @request, status: :created
     else
-      render json: @request.errors, status: :unprocessable_entity
+      render json: @request.errors, status: :unprocessable_content
     end
   end
 
@@ -21,7 +21,7 @@ class RequestsController < ApplicationController
       @request.proposals.create(user: current_user)
       head :no_content
     else
-      render json: { error: 'Maximum proposals reached' }, status: :unprocessable_entity
+      render json: { error: 'Maximum proposals reached' }, status: :unprocessable_content
     end
   end
 

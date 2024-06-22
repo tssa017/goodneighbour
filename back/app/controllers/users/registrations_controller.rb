@@ -10,9 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -73,4 +73,5 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #       status: {message: "User couldn't be created successfully. #{resource.erros.full_messages.to_sentence}"}
   #     }, status: :unprocessable_entity
   #   end
+  # end
 end

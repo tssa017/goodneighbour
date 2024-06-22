@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../auth_context/AuthContext'; // Import your AuthContext
 
 const Register = () => {
+    const { login } = useContext(AuthContext); // Access login function from AuthContext
+    const navigate = useNavigate(); // Initialize useNavigate
+
+    // Your state variables
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
@@ -19,10 +25,16 @@ const Register = () => {
 
         try {
             const response = await axios.post(
-                'http://localhost:3000/users',
+                'http://localhost:3000/users', // Adjust the endpoint accordingly
                 formData
             );
-            console.log(response.data);
+            console.log(response);
+
+            // Call login function from AuthContext to set isLoggedIn to true
+            await login({ email, password });
+
+            // Redirect to home page after successful registration and login
+            navigate('/'); // Replace '/' with your desired home page route
         } catch (error) {
             console.error(error);
         }

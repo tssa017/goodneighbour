@@ -1,11 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth_context/AuthContext';
 
 function Nav() {
-    const { isLoggedIn } = useContext(AuthContext);
+    const { isLoggedIn, logout } = useContext(AuthContext);
 
     const [isOpen, setIsOpen] = useState(false);
+
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout();
+        navigate('/'); // Redirect to login after logout
+    };
 
     return (
         <nav className="bg-gray-800 p-4">
@@ -115,6 +122,12 @@ function Nav() {
                                 className="text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium"
                             >
                                 Login/Register
+                            </button>
+                            <button
+                                onClick={handleLogout}
+                                className="w-full py-2 px-4 bg-red-500 text-white rounded hover:bg-red-700 transition duration-200"
+                            >
+                                Logout
                             </button>
                         </>
                     )}
