@@ -1,5 +1,5 @@
-import React, { useEffect, useState, useContext } from 'react';
-import axios from 'axios';
+import React, { useState, useContext } from 'react';
+// import axios from 'axios';
 import MapComponent from '../map/Map';
 import Login from '../login/Login';
 import Register from '../register/Register';

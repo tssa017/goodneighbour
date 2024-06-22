@@ -3,19 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../auth_context/AuthContext';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const navigate = useNavigate();
-    const { login } = useContext(AuthContext);
+
+    const { login, error } = useContext(AuthContext);
+    const [credentials, setCredentials] = useState({ email: '', password: '' });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await login({ user: { email, password } });
+            await login(credentials);
             navigate('/');
         } catch (error) {
-            console.error(error);
+            console.error('Login error:', error);
         }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setCredentials({ ...credentials, [name]: value });
     };
 
     return (
@@ -33,9 +38,10 @@ const Login = () => {
                         <input
                             type="email"
                             id="email"
+                            name="email"
                             className="mt-1 p-2 w-full border border-gray-300 rounded"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={credentials.email}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -49,9 +55,10 @@ const Login = () => {
                         <input
                             type="password"
                             id="password"
+                            name="password"
                             className="mt-1 p-2 w-full border border-gray-300 rounded"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={credentials.password}
+                            onChange={handleChange}
                             required
                         />
                     </div>
@@ -62,6 +69,7 @@ const Login = () => {
                         Login
                     </button>
                 </form>
+                {error && <p className="text-red-500 mt-2">{error}</p>}{' '}
             </div>
         </div>
     );

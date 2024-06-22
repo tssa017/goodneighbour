@@ -1,8 +1,11 @@
 import './output.css';
-import React, { useContext } from 'react';
+// import React, { useContext } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { AuthContext, AuthProvider } from './components/auth_context/AuthContext';
+import {
+    // AuthContext,
+    AuthProvider,
+} from './components/auth_context/AuthContext';
 import Nav from './components/nav/Nav';
 import Footer from './components/footer/Footer';
 
@@ -13,23 +16,24 @@ import RequestDetails from './components/requestdetails/RequestDetails';
 import Messages from './components/messages/Messages';
 
 const App = () => {
-  // const { isLoggedIn } = useContext(AuthContext);
-
-  return (
-    <AuthProvider>
-      <Router>
-        <Nav />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/request/new" element={<RequestForm />} />
-          <Route path="/request/:id" element={<RequestDetails />} />
-          <Route path="/request/:requestId/messages" element={<Messages />} />
-        </Routes>
-        <Footer />
-      </Router>
-    </AuthProvider>
-  );
+    return (
+        <AuthProvider>
+            <Router>
+                <Nav />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/profile" element={<Profile />} />
+                    <Route path="/request/new" element={<RequestForm />} />
+                    <Route path="/request/:id" element={<RequestDetails />} />
+                    <Route
+                        path="/request/:requestId/messages"
+                        element={<Messages />}
+                    />
+                </Routes>
+                <Footer />
+            </Router>
+        </AuthProvider>
+    );
 };
 
 export default App;
