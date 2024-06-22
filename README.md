@@ -72,14 +72,15 @@ npm start
 
 Ensure you have the following environment variables set in `config/.env` files in their respective repositories:
 
-### Back .env
+### Back `.env`
 
--   `TBD`
+-   `DB_NAME`
+-   `DB_USER`
+-   `DB_PASSWORD`
 
-### Front .env
+### Front `.env`
 
 -   `REACT_APP_GOOGLE_MAPS_API_KEY`
--   `TBD`
 
 ## Models
 
