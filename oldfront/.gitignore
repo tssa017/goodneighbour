@@ -11,7 +11,7 @@
 # production
 /build
 
-# Ignore all environment files (except templates).
+# Ignore all environment files 
 /.env*
 !/.env*.erb
 
