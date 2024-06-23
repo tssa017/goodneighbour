@@ -1,13 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    sessions: 'users/sessions',
-    registrations: 'users/registrations'
-  }
-  resources :requests, only: [:index, :create, :show, :update] do
-    member do
-      post 'propose'
-    end
-  end
-  resources :messages, only: [:create, :index]
-end
+  devise_for :users,
+    path: '',
+    path_names: {
+      sign_in: 'login',
+      sign_out: 'logout',
+      registration: 'signup'
+    },
+    controllers: {
+      sessions: 'users/sessions',
+      registrations: 'users/registrations'
+    }
+  get 'private/test'
 
+end
