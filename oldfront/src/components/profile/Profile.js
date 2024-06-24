@@ -10,7 +10,7 @@ const Profile = () => {
             try {
                 const response = await axios.get(
                     'http://localhost:3000/profile',
-                    { withCredentials: true } // This is important to include the session cookies
+                    { withCredentials: true }
                 );
                 setProfileData(response.data);
             } catch (error) {

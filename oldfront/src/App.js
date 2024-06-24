@@ -21,7 +21,7 @@ const App = () => {
             <Router>
                 <Nav />
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/home" element={<Home />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/request/new" element={<RequestForm />} />
                     <Route path="/request/:id" element={<RequestDetails />} />

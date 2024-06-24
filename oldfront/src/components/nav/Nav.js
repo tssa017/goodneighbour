@@ -17,7 +17,7 @@ function Nav() {
     return (
         <nav className="bg-gray-800 p-4">
             <div className="max-w-7xl mx-auto flex items-center justify-between">
-                <Link to="/" className="text-white text-lg font-bold">
+                <Link to="/home" className="text-white text-lg font-bold">
                     GoodNeighbour
                 </Link>
                 <div className="md:hidden">
@@ -46,7 +46,7 @@ function Nav() {
                     {isLoggedIn ? (
                         <>
                             <Link
-                                to="/"
+                                to="/home"
                                 className="current text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium"
                             >
                                 Home
@@ -95,7 +95,7 @@ function Nav() {
                     {isLoggedIn ? (
                         <>
                             <Link
-                                to="/"
+                                to="/home"
                                 className="current text-gray-300 hover:text-white px-3 py-2 rounded-md font-medium"
                             >
                                 Home

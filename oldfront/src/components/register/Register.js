@@ -34,7 +34,7 @@ const Register = () => {
             await login({ email, password });
 
             // Redirect to home page after successful registration and login
-            navigate('/'); // Replace '/' with your desired home page route
+            navigate('/home'); // Replace '/' with your desired home page route
         } catch (error) {
             console.error(error);
         }

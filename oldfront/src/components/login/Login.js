@@ -12,7 +12,7 @@ const Login = () => {
         e.preventDefault();
         try {
             await login(credentials);
-            navigate('/');
+            navigate('/home');
         } catch (error) {
             console.error('Login error:', error);
         }
