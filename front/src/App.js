@@ -1,14 +1,45 @@
+import './output.css';
+// import React, { useContext } from 'react';
 import { useState } from 'react';
-import './App.css';
-import User from './components/user/User';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-function App() {
+import User from './components/user/User';
+import {
+    // AuthContext,
+    AuthProvider,
+} from './components/auth_context/AuthContext';
+import Nav from './components/nav/Nav';
+// import Footer from './components/footer/Footer';
+
+import Profile from './components/profile/Profile';
+// import Home from './components/home/Home';
+// import RequestForm from './components/request_form/RequestForm';
+// import RequestDetails from './components/requestdetails/RequestDetails';
+// import Messages from './components/messages/Messages';
+
+const App = () => {
     const [currUser, setCurrUser] = useState(null);
+
     return (
-        <div className="App">
+        <AuthProvider>
             <User currUser={currUser} setCurrUser={setCurrUser} />
-        </div>
+            <Router>
+                <Nav />
+                <Routes>
+                    <Route path="/profile" element={<Profile />} />
+                    {/* <Route path="/" element={<Home />} />
+
+                    <Route path="/request/new" element={<RequestForm />} />
+                    <Route path="/request/:id" element={<RequestDetails />} />
+                    <Route
+                        path="/request/:requestId/messages"
+                        element={<Messages />}
+                    /> */}
+                </Routes>
+                {/* <Footer /> */}
+            </Router>
+        </AuthProvider>
     );
-}
+};
 
 export default App;
