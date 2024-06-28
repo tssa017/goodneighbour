@@ -28,6 +28,7 @@ const RequestForm = ({ currUser }) => {
     const [longitude, setLongitude] = useState(center.lng);
     const [locationError, setLocationError] = useState('');
     const [mapCenter, setMapCenter] = useState(center);
+    // TODO: Check
     const [modalOpen, setModalOpen] = useState(false);
     const autocompleteRef = useRef(null);
 
@@ -54,12 +55,11 @@ const RequestForm = ({ currUser }) => {
                 }
             );
             console.log(response.data);
-            setModalOpen(true);
         } catch (error) {
             console.error(error);
         }
 
-        setLocationError(''); // Clear error after successful submission
+        setLocationError('');
     };
 
     const onLoad = (autoC) => {
@@ -89,23 +89,23 @@ const RequestForm = ({ currUser }) => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-light">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-light py-12">
             <h2 className="text-4xl font-bold text-primary text-center mb-6">
                 Create a Request
             </h2>
-            <div className="bg-white mb-8 p-8 rounded-lg shadow-lg w-full max-w-md">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label
                             htmlFor="title"
-                            className="block text-sm font-medium text-gray-700"
+                            className="block text-sm font-medium text-gray-700 text-left pb-1"
                         >
                             Title
                         </label>
                         <input
                             type="text"
                             id="title"
-                            className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
                             value={title}
                             onChange={(e) => setTitle(e.target.value)}
                             required
@@ -114,13 +114,13 @@ const RequestForm = ({ currUser }) => {
                     <div>
                         <label
                             htmlFor="description"
-                            className="block text-sm font-medium text-gray-700"
+                            className="block text-sm font-medium text-gray-700 text-left pb-1"
                         >
                             Description
                         </label>
                         <textarea
                             id="description"
-                            className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                             required
@@ -129,13 +129,13 @@ const RequestForm = ({ currUser }) => {
                     <div>
                         <label
                             htmlFor="request_type"
-                            className="block text-sm font-medium text-gray-700"
+                            className="block text-sm font-medium text-gray-700 text-left pb-1"
                         >
-                            Request Type
+                            Request type
                         </label>
                         <select
                             id="request_type"
-                            className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
+                            className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
                             value={requestType}
                             onChange={(e) => setRequestType(e.target.value)}
                             required
@@ -145,7 +145,7 @@ const RequestForm = ({ currUser }) => {
                         </select>
                     </div>
                     {locationError && (
-                        <div className="mb-4 text-red-500 text-center">
+                        <div className="mb-4 text-dark text-center">
                             {locationError}
                         </div>
                     )}
@@ -164,7 +164,7 @@ const RequestForm = ({ currUser }) => {
                                 <input
                                     type="text"
                                     placeholder="Enter a location"
-                                    className="mt-1 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:border-primary"
+                                    className="my-3 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
                                 />
                             </Autocomplete>
                             <GoogleMap
@@ -188,7 +188,6 @@ const RequestForm = ({ currUser }) => {
                     </button>
                 </form>
             </div>
-
             {modalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full text-center">

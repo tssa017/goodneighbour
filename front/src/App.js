@@ -27,6 +27,7 @@ function App() {
                         setCurrUser={setCurrUser}
                         setShow={setShow}
                     />
+                    <User currUser={currUser} setCurrUser={setCurrUser} />
                     <div className="container mx-auto">
                         <Routes>
                             <Route
@@ -68,10 +69,7 @@ function App() {
                                         setCurrUser={setCurrUser}
                                     />
                                 }
-                            >
-                                {/* TODO: Remove this probably */}
-                                {/* <Profile currUser={currUser} setCurrUser={setCurrUser} /> */}
-                            </Route>
+                            ></Route>
                             <Route
                                 path="/request"
                                 element={<RequestForm currUser={currUser} />}
@@ -82,8 +80,6 @@ function App() {
                             />
                         </Routes>
                     </div>
-                    {/* TODO: Check on this */}
-                    <User currUser={currUser} setCurrUser={setCurrUser} />
                     <Footer />
                 </Router>
             </div>
