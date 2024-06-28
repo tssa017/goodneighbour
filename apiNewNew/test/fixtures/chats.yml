@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  request: one
+  answerer: one
+  requester: one
+
+two:
+  request: two
+  answerer: two
+  requester: two

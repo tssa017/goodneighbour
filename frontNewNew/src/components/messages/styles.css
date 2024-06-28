@@ -1,0 +1,76 @@
+.main-chat-window {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px; /* Adjust max-width as needed */
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.tabs button {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.tabs button.active {
+  background-color: #e0e0e0;
+}
+
+.content {
+  display: flex;
+  gap: 20px;
+}
+
+.column {
+  flex: 1;
+}
+
+.request-list {
+  margin-bottom: 20px;
+}
+
+.request-item {
+  cursor: pointer;
+  padding: 10px;
+}
+
+.request-item.selected {
+  background-color: #e0e0e0;
+}
+
+.users-list {
+  margin-bottom: 20px;
+}
+
+.user-item {
+  padding: 10px;
+}
+
+.user-item p {
+  margin: 5px 0;
+}
+
+.request-item, .user-item {
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+}
+
+.request-item.selected, .user-item.selected {
+  background-color: #d3d3d3;
+  border-color: #000;
+}
+
+.tabs button.active {
+  background-color: #007bff;
+  color: white;
+}
