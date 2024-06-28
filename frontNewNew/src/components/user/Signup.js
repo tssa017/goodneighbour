@@ -42,7 +42,7 @@ const Signup = ({ setCurrUser, setShow }) => {
 
         signup(userFormData, setCurrUser);
         e.target.reset();
-        setPasswordError(''); // Clear error after successful submission
+        setPasswordError('');
     };
 
     const handleClick = (e) => {
@@ -57,12 +57,15 @@ const Signup = ({ setCurrUser, setShow }) => {
                 onSubmit={handleSubmit}
                 className="w-full max-w-sm p-6 bg-white rounded-lg shadow-md"
             >
-                <h2 className="mb-4 text-3xl font-semibold text-center text-primary">
+                <h2 className="mb-4 text-4xl font-semibold text-center text-primary">
                     Sign up
                 </h2>
+                <p className="py-4 text-sm text-left">
+                    Once you have signed up, please redirect to the log in page!
+                </p>
                 <div className="mb-4">
                     <label
-                        className="block mb-1 text-gray-600"
+                        className="block mb-3 text-gray-600 text-left"
                         htmlFor="first_name"
                     >
                         First name
@@ -78,7 +81,7 @@ const Signup = ({ setCurrUser, setShow }) => {
                 </div>
                 <div className="mb-4">
                     <label
-                        className="block mb-1 text-gray-600"
+                        className="block mb-3 text-gray-600 text-left"
                         htmlFor="last_name"
                     >
                         Last name
@@ -93,7 +96,10 @@ const Signup = ({ setCurrUser, setShow }) => {
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block mb-1 text-gray-600" htmlFor="email">
+                    <label
+                        className="block mb-3 text-gray-600 text-left"
+                        htmlFor="email"
+                    >
                         Email
                     </label>
                     <input
@@ -107,7 +113,7 @@ const Signup = ({ setCurrUser, setShow }) => {
                 </div>
                 <div className="mb-4">
                     <label
-                        className="block mb-1 text-gray-600"
+                        className="block mb-3 text-gray-600 text-left"
                         htmlFor="password"
                     >
                         Password
@@ -123,7 +129,7 @@ const Signup = ({ setCurrUser, setShow }) => {
                 </div>
                 <div className="mb-4">
                     <label
-                        className="block mb-1 text-gray-600"
+                        className="block mb-3 text-gray-600 text-left"
                         htmlFor="password_confirmation"
                     >
                         Confirm Password
@@ -144,7 +150,7 @@ const Signup = ({ setCurrUser, setShow }) => {
                 )}
                 <div className="my-6">
                     <label
-                        className="block mb-1 text-gray-600 py-1"
+                        className="block mb-1 py-1 text-gray-600 text-sm text-left"
                         htmlFor="id_photo"
                     >
                         🛂 Upload a photo of your government-approved ID to
@@ -162,7 +168,7 @@ const Signup = ({ setCurrUser, setShow }) => {
                     type="submit"
                     className="w-full py-2 mt-4 mb-4 text-white bg-secondary rounded-md hover:bg-secondary focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
                 >
-                    Submit
+                    Submit ✨
                 </button>
                 <div className="text-center text-gray-600">
                     Already registered?{' '}

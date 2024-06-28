@@ -53,7 +53,7 @@ const Login = ({ setCurrUser, setShow }) => {
                 onSubmit={handleSubmit}
                 className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg"
             >
-                <h2 className="mb-6 text-3xl font-semibold text-center text-primary">
+                <h2 className="mb-6 text-4xl font-semibold text-center text-primary">
                     Log in
                 </h2>
                 {errorMessage && (
@@ -64,7 +64,7 @@ const Login = ({ setCurrUser, setShow }) => {
                 <div className="mb-4">
                     <label
                         htmlFor="email"
-                        className="block text-sm font-medium text-gray-700"
+                        className="block mb-3 text-gray-600 text-left"
                     >
                         Email
                     </label>
@@ -73,7 +73,7 @@ const Login = ({ setCurrUser, setShow }) => {
                         id="email"
                         name="email"
                         placeholder="Enter your email"
-                        className="w-full px-3 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring focus:ring-primary"
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary focus:border-primary"
                         required
                         autoComplete="email"
                     />
@@ -81,7 +81,7 @@ const Login = ({ setCurrUser, setShow }) => {
                 <div className="mb-6">
                     <label
                         htmlFor="password"
-                        className="block text-sm font-medium text-gray-700"
+                        className="block mb-3 text-gray-600 text-left"
                     >
                         Password
                     </label>
@@ -90,7 +90,7 @@ const Login = ({ setCurrUser, setShow }) => {
                         id="password"
                         name="password"
                         placeholder="Enter your password"
-                        className="w-full px-3 py-2 mt-1 text-sm border rounded-md focus:outline-none focus:ring focus:ring-primary"
+                        className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:ring-primary focus:border-primary"
                         required
                         autoComplete="current-password"
                     />
