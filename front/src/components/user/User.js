@@ -7,7 +7,7 @@ const User = ({ currUser, setCurrUser }) => {
 
     if (currUser) {
         return (
-            <div className="text-secondary text-2xl rounded mt-8 font-black bg-light p-4 sm:p-6 md:p-8">
+            <div className="text-secondary text-xl rounded mt-8 font-black bg-light p-4 sm:p-6 md:p-8">
                 Welcome, {currUser.first_name} 👋
             </div>
         );

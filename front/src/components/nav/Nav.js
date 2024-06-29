@@ -46,7 +46,7 @@ const Nav = ({ currUser, setCurrUser, setShow }) => {
                         </svg>
                     </button>
                 </div>
-                <div className="hidden md:flex space-x-6">
+                <div className="hidden md:flex space-x-6 items-center">
                     {currUser && (
                         <>
                             <Link
@@ -68,7 +68,7 @@ const Nav = ({ currUser, setCurrUser, setShow }) => {
                                 Profile
                             </Link>
                             <Link
-                                to="/request" // TODO: check on requests/new
+                                to="/request"
                                 className="text-white hover:text-gray-200"
                             >
                                 Make a request
@@ -87,7 +87,7 @@ const Nav = ({ currUser, setCurrUser, setShow }) => {
                             </Link>
                             <button
                                 onClick={handleLogout}
-                                className="bg-red-500 text-white px-3 py-2 rounded hover:bg-dark"
+                                className="ml-auto bg-red-500 text-white px-3 py-2 rounded hover:bg-dark"
                             >
                                 Logout
                             </button>
@@ -118,13 +118,7 @@ const Nav = ({ currUser, setCurrUser, setShow }) => {
                                         Profile
                                     </Link>
                                     <Link
-                                        to="/contact"
-                                        className="text-white py-2 hover:text-gray-200"
-                                    >
-                                        Contact
-                                    </Link>
-                                    <Link
-                                        to="/request" // TODO: check on requests/new
+                                        to="/request"
                                         className="text-white py-2 hover:text-gray-200"
                                     >
                                         Make a request
@@ -134,6 +128,12 @@ const Nav = ({ currUser, setCurrUser, setShow }) => {
                                         className="text-white py-2 hover:text-gray-200"
                                     >
                                         Messages
+                                    </Link>
+                                    <Link
+                                        to="/contact"
+                                        className="text-white py-2 hover:text-gray-200"
+                                    >
+                                        Contact
                                     </Link>
                                     <button
                                         onClick={handleLogout}
