@@ -67,16 +67,16 @@ const Nav = ({ currUser, setCurrUser }) => {
                                 Profile
                             </Link>
                             <Link
-                                to="/request"
-                                className="text-white hover:text-gray-200"
-                            >
-                                Manage your requests
-                            </Link>
-                            <Link
                                 to="/request/new"
                                 className="text-white hover:text-gray-200"
                             >
                                 Make a request
+                            </Link>
+                            <Link
+                                to="/request"
+                                className="text-white hover:text-gray-200"
+                            >
+                                Manage your requests
                             </Link>
                             <Link
                                 to="/messages"
@@ -129,16 +129,16 @@ const Nav = ({ currUser, setCurrUser }) => {
                                         Contact
                                     </Link>
                                     <Link
-                                        to="/request"
-                                        className="text-white py-2 hover:text-gray-200"
-                                    >
-                                        Manage your requests
-                                    </Link>
-                                    <Link
                                         to="/request/new"
                                         className="text-white py-2 hover:text-gray-200"
                                     >
                                         Make a request
+                                    </Link>
+                                    <Link
+                                        to="/request"
+                                        className="text-white py-2 hover:text-gray-200"
+                                    >
+                                        Manage your requests
                                     </Link>
                                     <Link
                                         to="/messages"

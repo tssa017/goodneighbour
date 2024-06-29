@@ -89,6 +89,7 @@ class RequestsController < ApplicationController
     begin
       @request = Request.find(params[:id])
       @request.status = "closed"
+      @request.hidden = true
       if @request.save
         Rails.logger.info("Request closed successfully, status = #{@request.status}, hidden = #{@request.hidden}")
         render json: @request, status: :created
