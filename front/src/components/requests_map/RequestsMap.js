@@ -17,7 +17,7 @@ const RequestMap = ({ currUser }) => {
         lat: lat,
         lng: lon,
     };
-    console.log(center);
+
     useEffect(() => {
         const fetchRequests = async () => {
             try {
@@ -30,14 +30,15 @@ const RequestMap = ({ currUser }) => {
             }
         };
 
-        if (currUser) {
-            fetchRequests();
-        }
-    }, [currUser]);
+        const interval = setInterval(fetchRequests, 5000); // Fetch requests every 5 seconds
+
+        return () => clearInterval(interval); // Cleanup interval on component unmount
+    }, []);
 
     if (!currUser) {
         return null;
     }
+
     const unfulfilledRequestsCount = requests.filter(
         (request) => request.status !== 'closed'
     ).length;
@@ -58,7 +59,7 @@ const RequestMap = ({ currUser }) => {
                         gestureHandling={'greedy'}
                     >
                         {requests.map((request) => (
-                            <div>
+                            <div key={request.id}>
                                 {request.hidden === false ? (
                                     <RequestMarker
                                         request={request}
