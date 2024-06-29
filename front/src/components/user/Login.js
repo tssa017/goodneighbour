@@ -1,9 +1,11 @@
 import { useRef, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setCurrUser, setShow }) => {
     const formRef = useRef();
     const [errorMessage, setErrorMessage] = useState('');
+    const navigate = useNavigate();
 
     const login = async (userInfo, setCurrUser) => {
         const url = 'http://localhost:3000/login';
@@ -20,6 +22,7 @@ const Login = ({ setCurrUser, setShow }) => {
                 response.headers.get('Authorization')
             );
             setCurrUser(data);
+            navigate('/home'); // Redirect to /home after successful login
         } catch (error) {
             console.log('error', error);
             if (error.response && error.response.status === 401) {
