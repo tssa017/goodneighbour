@@ -11,7 +11,7 @@ class RequestsController < ApplicationController
     render json: @request
   end
 
-  def show_user
+  def user_request
     @request = Request.where(user_id: params[:user_id])
     render json: @request
   end

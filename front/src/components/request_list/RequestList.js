@@ -10,7 +10,7 @@ const RequestList = ({ currUser }) => {
         const fetchRequests = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/requests/show_user?user_id=${currUser.id}`
+                    `http://localhost:3000/requests/user_request?user_id=${currUser.id}`
                 );
                 setRequests(response.data);
             } catch (error) {
@@ -32,21 +32,32 @@ const RequestList = ({ currUser }) => {
             const response = await axios.put(
                 `http://localhost:3000/requests/${action}?id=${requestId}`
             );
-            setRequests(requests.map(request =>
-                request.id === requestId ? response.data : request
-            ));
+            setRequests(
+                requests.map((request) =>
+                    request.id === requestId ? response.data : request
+                )
+            );
         } catch (error) {
-            console.error(`Error ${action === 'close' ? 'closing' : 'reopening'} request:`, error);
+            console.error(
+                `Error ${
+                    action === 'close' ? 'closing' : 'reopening'
+                } request:`,
+                error
+            );
         }
     };
 
-    const openRequests = requests.filter(request => request.status !== 'closed');
-    const closedRequests = requests.filter(request => request.status === 'closed');
+    const openRequests = requests.filter(
+        (request) => request.status !== 'closed'
+    );
+    const closedRequests = requests.filter(
+        (request) => request.status === 'closed'
+    );
 
     const toggleDescription = (requestId) => {
-        setExpandedRequestIds(prevState =>
+        setExpandedRequestIds((prevState) =>
             prevState.includes(requestId)
-                ? prevState.filter(id => id !== requestId)
+                ? prevState.filter((id) => id !== requestId)
                 : [...prevState, requestId]
         );
     };
@@ -74,22 +85,33 @@ const RequestList = ({ currUser }) => {
                                 onClick={() => toggleDescription(request.id)}
                                 className="text-blue-500 underline"
                             >
-                                {expandedRequestIds.includes(request.id) ? 'See less' : 'See more'}
+                                {expandedRequestIds.includes(request.id)
+                                    ? 'See less'
+                                    : 'See more'}
                             </button>
                         </td>
                         <td className="py-2 px-4 border-b">{request.status}</td>
-                        <td className="py-2 px-4 border-b">{request.proposals_count}</td>
+                        <td className="py-2 px-4 border-b">
+                            {request.proposals_count}
+                        </td>
                         <td className="py-2 px-4 border-b">
                             {request.status !== 'closed' ? (
                                 <button
-                                    onClick={() => handleRequestAction(request.id, 'close')}
+                                    onClick={() =>
+                                        handleRequestAction(request.id, 'close')
+                                    }
                                     className="bg-red-500 text-white px-4 py-1 rounded"
                                 >
                                     Close this request
                                 </button>
                             ) : (
                                 <button
-                                    onClick={() => handleRequestAction(request.id, 'reopen')}
+                                    onClick={() =>
+                                        handleRequestAction(
+                                            request.id,
+                                            'reopen'
+                                        )
+                                    }
                                     className="bg-green-500 text-white px-4 py-1 rounded"
                                 >
                                     Reopen
@@ -122,7 +144,9 @@ const RequestList = ({ currUser }) => {
                 </button>
             </div>
             <div className="w-full max-w-4xl">
-                {activeTab === 'open' ? renderRequests(openRequests) : renderRequests(closedRequests)}
+                {activeTab === 'open'
+                    ? renderRequests(openRequests)
+                    : renderRequests(closedRequests)}
             </div>
         </div>
     );

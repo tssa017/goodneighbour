@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     }
   resources :requests do
     post 'answer_request', on: :collection
-    get 'show_user', on: :collection
+    get 'user_request', on: :collection
     put 'close', on: :collection
     put 'reopen', on: :collection
   end
