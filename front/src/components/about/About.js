@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const About = () => {
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-light">
+        <div className="min-h-screen flex flex-col items-center bg-light py-6">
             <h1 className="text-4xl font-bold text-primary text-center mb-6">
                 About GoodNeighbour
             </h1>

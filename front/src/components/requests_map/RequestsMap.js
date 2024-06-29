@@ -50,7 +50,7 @@ const RequestMap = ({ currUser }) => {
             <h2 className="text-4xl font-bold text-primary text-center mb-6">
                 Track the aid requests!
             </h2>
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-5xl">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full">
                 <APIProvider
                     apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
                     // libraries={libraries}

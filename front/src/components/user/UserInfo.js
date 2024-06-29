@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const UserInfo = ({ currUser, setCurrUser, setShow }) => {
     const [user, setUser] = useState(currUser);
@@ -8,7 +9,7 @@ const UserInfo = ({ currUser, setCurrUser, setShow }) => {
     }, [currUser]);
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-light">
+        <div className="min-h-screen flex flex-col items-center bg-light py-4">
             <h2 className="text-4xl font-bold text-primary text-center mb-6">
                 Profile
             </h2>
@@ -36,6 +37,20 @@ const UserInfo = ({ currUser, setCurrUser, setShow }) => {
                     <p className="text-lg font-semibold text-gray-800">
                         {user.email}
                     </p>
+                </div>
+                <div className="text-sm text-left">
+                    <p className="py-3">
+                        ℹ️{' '}
+                        <em>
+                            Since all profiles must be validated with a
+                            government ID, users cannot individally update their
+                            profiles.
+                        </em>
+                    </p>
+                    <Link to="/contact">
+                        <strong>Contact us </strong>if you need to make a
+                        change!
+                    </Link>
                 </div>
             </div>
         </div>

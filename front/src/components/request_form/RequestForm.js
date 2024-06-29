@@ -89,9 +89,9 @@ const RequestForm = ({ currUser }) => {
     };
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-light py-12">
+        <div className="min-h-screen flex flex-col items-center bg-light py-4">
             <h2 className="text-4xl font-bold text-primary text-center mb-6">
-                Create a Request
+                Create a request
             </h2>
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <form onSubmit={handleSubmit} className="space-y-4">
