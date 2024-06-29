@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-const Nav = ({ currUser, setCurrUser, setShow }) => {
+const Nav = ({ currUser, setCurrUser }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         setCurrUser(null);
-        setShow(false);
     };
 
     return (

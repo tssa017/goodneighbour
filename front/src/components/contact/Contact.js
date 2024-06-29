@@ -3,17 +3,17 @@ import React from 'react';
 const Contact = () => {
     return (
         <div className="min-h-screen flex flex-col items-center bg-light py-8">
-            <div className="max-w-4xl mx-auto flex flex-col items-center">
+            <div className="w-full max-w-6xl mx-auto flex flex-col items-center">
                 <h1 className="text-4xl font-bold text-primary text-center mb-6">
                     Contact us
                 </h1>
                 <p className="text-xl mb-8 text-center">
                     We would love to hear from you! 🤗
                 </p>
-                <form className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+                <form className="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md">
                     <div className="mb-4">
                         <label
-                            className="block mb-1 text-gray-600"
+                            className="block mb-1 text-gray-600 text-left"
                             htmlFor="name"
                         >
                             Name
@@ -29,7 +29,7 @@ const Contact = () => {
                     </div>
                     <div className="mb-4">
                         <label
-                            className="block mb-1 text-gray-600"
+                            className="block mb-1 text-gray-600 text-left"
                             htmlFor="email"
                         >
                             Email
@@ -45,7 +45,7 @@ const Contact = () => {
                     </div>
                     <div className="mb-4">
                         <label
-                            className="block mb-1 text-gray-600"
+                            className="block mb-1 text-gray-600 text-left"
                             htmlFor="message"
                         >
                             Message
