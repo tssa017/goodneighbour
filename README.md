@@ -46,7 +46,7 @@ bundle install
 
 ```bash
 rails db:create
-rails db:migrate
+rails db:schema:load
 ```
 
 4. Start the back-end server:
