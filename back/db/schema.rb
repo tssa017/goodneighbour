@@ -44,12 +44,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_221053) do
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "first_name"
-    t.string "last_name"
-  end
 
   create_table "requests", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -59,6 +53,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_221053) do
     t.float "latitude"
     t.float "longitude"
     t.string "status"
+    t.boolean "hidden"
+    t.integer "proposals_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_requests_on_user_id"
@@ -75,9 +71,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_221053) do
     t.string "first_name"
     t.string "last_name"
     t.string "id_photo"
-    t.integer "profile_id"
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["profile_id"], name: "index_users_on_profile_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
@@ -87,5 +81,4 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_25_221053) do
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "requests", "users"
-  add_foreign_key "users", "profiles"
 end

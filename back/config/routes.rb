@@ -10,11 +10,14 @@ Rails.application.routes.draw do
       sessions: 'users/sessions',
       registrations: 'users/registrations'
     }
-  get 'private/test'
   resources :requests do
     post 'answer_request', on: :collection
+    get 'show_user', on: :collection
+    put 'close', on: :collection
+    put 'reopen', on: :collection
   end
   resources :requests, only: [:index, :create, :show, :update]
+
   resources :chats, only: [:index]
   get "chats/chat"
 

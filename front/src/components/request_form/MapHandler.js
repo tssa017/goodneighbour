@@ -1,0 +1,21 @@
+import {useMap} from '@vis.gl/react-google-maps';
+import React, {useEffect} from 'react';
+
+
+const MapHandler = ({place, setLatitude, setLongitude}) => {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!map || !place) return;
+    if (place.geometry?.viewport) {
+      map.fitBounds(place.geometry?.viewport);
+    }
+    setLatitude(place.geometry?.location?.lat());
+    setLongitude(place.geometry?.location?.lng());
+
+  }, [map, place]);
+
+  return null;
+};
+
+export default React.memo(MapHandler);

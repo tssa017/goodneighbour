@@ -11,8 +11,8 @@ import UserInfo from './components/user/UserInfo';
 import Footer from './components/footer/Footer';
 import RequestForm from './components/request_form/RequestForm';
 import RequestsMap from './components/requests_map/RequestsMap';
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
 import MainChatWindow from './components/messages/MainChatWindow';
+import RequestList from './components/request_list/RequestList';
 
 function App() {
     const [currUser, setCurrUser] = useState(null);
@@ -72,6 +72,10 @@ function App() {
                             ></Route>
                             <Route
                                 path="/request"
+                                element={<RequestList currUser={currUser} />}
+                            />
+                            <Route
+                                path="/request/new"
                                 element={<RequestForm currUser={currUser} />}
                             />
                             <Route

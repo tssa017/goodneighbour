@@ -1,36 +1,36 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import {
-    GoogleMap,
-    LoadScript,
-    MarkerF,
-    Autocomplete,
-} from '@react-google-maps/api';
+import useGeoLocation from '../geolocation/Geolocation';
 
-const libraries = ['places'];
+import {
+    Marker,
+    Map,
+    APIProvider,
+    MapControl,
+    ControlPosition,
+} from '@vis.gl/react-google-maps';
+
+import PlaceAutocomplete from './Autocomplete';
+import MapHandler from './MapHandler';
 
 const mapContainerStyle = {
     width: '100%',
     height: '400px',
 };
 
-const center = {
-    lat: 37.7749,
-    lng: -122.4194,
-};
 
 const RequestForm = ({ currUser }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [requestType, setRequestType] = useState('task');
-    const [latitude, setLatitude] = useState(center.lat);
-    const [longitude, setLongitude] = useState(center.lng);
+
     const [locationError, setLocationError] = useState('');
-    const [mapCenter, setMapCenter] = useState(center);
-    // TODO: Check
+    const { lat, lon } = useGeoLocation();
+    const [latitude, setLatitude] = useState(lat);
+    const [longitude, setLongitude] = useState(lon);
+    const [selectedPlace, setSelectedPlace] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
-    const autocompleteRef = useRef(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -62,22 +62,6 @@ const RequestForm = ({ currUser }) => {
         setLocationError('');
     };
 
-    const onLoad = (autoC) => {
-        autocompleteRef.current = autoC;
-    };
-
-    const onPlaceChanged = () => {
-        if (autocompleteRef.current !== null) {
-            const place = autocompleteRef.current.getPlace();
-            const lat = place.geometry.location.lat();
-            const lng = place.geometry.location.lng();
-            setLatitude(lat);
-            setLongitude(lng);
-            setMapCenter({ lat, lng });
-        } else {
-            console.log('Autocomplete is not loaded yet!');
-        }
-    };
 
     const onMarkerDragEnd = (event) => {
         setLatitude(event.latLng.lat());
@@ -150,35 +134,31 @@ const RequestForm = ({ currUser }) => {
                         </div>
                     )}
                     <div>
-                        <LoadScript
-                            googleMapsApiKey={
-                                process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-                            }
-                            libraries={libraries}
-                            loadingElement={<div>Loading...</div>}
+                        <APIProvider
+                        apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+                        libraries={["places"]}
                         >
-                            <Autocomplete
-                                onLoad={onLoad}
-                                onPlaceChanged={onPlaceChanged}
-                            >
-                                <input
-                                    type="text"
-                                    placeholder="Enter a location"
-                                    className="my-3 p-2 w-full border border-gray-300 rounded-lg focus:outline-none focus:border-green-500"
-                                />
-                            </Autocomplete>
-                            <GoogleMap
-                                mapContainerStyle={mapContainerStyle}
-                                center={mapCenter}
-                                zoom={10}
-                            >
-                                <MarkerF
-                                    position={{ lat: latitude, lng: longitude }}
-                                    draggable={true}
-                                    onDragEnd={onMarkerDragEnd}
-                                />
-                            </GoogleMap>
-                        </LoadScript>
+                        <MapControl position={ControlPosition.TOP}>
+                            <div className="autocomplete-control w-full rounded-lg">
+                                <PlaceAutocomplete onPlaceSelect={setSelectedPlace} />
+                            </div>
+                        </MapControl>
+                        <Map
+                            mapId={'bf51a92d020fa25b'}
+                            style={mapContainerStyle}
+                            defaultZoom={15}
+                            center={{lat: latitude, lng: longitude}}
+                            gestureHandling={'greedy'}
+                            disableDefaultUI={true}
+                        >
+                            <Marker
+                                position={{ lat: latitude, lng: longitude }}
+                                draggable={true}
+                                onDragEnd={onMarkerDragEnd}
+                             />
+                        </Map>
+                        <MapHandler place={selectedPlace} setLatitude={setLatitude} setLongitude={setLongitude} />
+                    </APIProvider>
                     </div>
                     <button
                         type="submit"

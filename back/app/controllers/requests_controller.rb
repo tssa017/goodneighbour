@@ -8,11 +8,13 @@ class RequestsController < ApplicationController
 
   def show
     @request = Request.find(params[:id])
+    render json: @request
   end
 
-  # def show_user
-  #   @request = Request.find(params[:user_id])
-  # end
+  def show_user
+    @request = Request.where(user_id: params[:user_id])
+    render json: @request
+  end
 
   def create
     @request = Request.new(request_params)
@@ -59,8 +61,8 @@ class RequestsController < ApplicationController
 
       if @chat.save
         # Update proposals count
-        @request.proposals_count += 1
-        @request.status = @request.proposals_count < 5 ? "answered" : "closed"
+        @request.increment!(:proposals_count, 1)
+        @request.status = "answered"
         @request.hidden = @request.proposals_count >= 5
 
         if @request.save
@@ -73,6 +75,48 @@ class RequestsController < ApplicationController
       else
         Rails.logger.error("Failed to create chat: #{@chat.errors.full_messages.join(', ')}")
         render json: { error: 'Failed to create chat', details: @chat.errors.full_messages }, status: :unprocessable_entity
+      end
+    rescue ActiveRecord::RecordNotFound => e
+      Rails.logger.error("Request not found: #{e.message}")
+      render json: { error: 'Request not found', details: e.message }, status: :not_found
+    rescue => e
+      Rails.logger.error("An unexpected error occurred: #{e.message}")
+      render json: { error: 'An unexpected error occurred', details: e.message }, status: :unprocessable_entity
+    end
+  end
+
+  def close
+    begin
+      @request = Request.find(params[:id])
+      @request.status = "closed"
+      if @request.save
+        Rails.logger.info("Request closed successfully, status = #{@request.status}, hidden = #{@request.hidden}")
+        render json: @request, status: :created
+      else
+        Rails.logger.error("Failed to close the request: #{@request.errors.full_messages.join(', ')}")
+        render json: { error: 'Failed to close the request', details: @request.errors.full_messages }, status: :unprocessable_entity
+      end
+    rescue ActiveRecord::RecordNotFound => e
+      Rails.logger.error("Request not found: #{e.message}")
+      render json: { error: 'Request not found', details: e.message }, status: :not_found
+    rescue => e
+      Rails.logger.error("An unexpected error occurred: #{e.message}")
+      render json: { error: 'An unexpected error occurred', details: e.message }, status: :unprocessable_entity
+    end
+  end
+
+  def reopen
+    begin
+      @request = Request.find(params[:id])
+      @request.status = "reopened"
+      @request.proposals_count = 0
+      @request.hidden = false
+      if @request.save
+        Rails.logger.info("Request re-opened successfully, status = #{@request.status}, hidden = #{@request.hidden}")
+        render json: @request, status: :created
+      else
+        Rails.logger.error("Failed to re-open the request: #{@request.errors.full_messages.join(', ')}")
+        render json: { error: 'Failed to re-open the request', details: @request.errors.full_messages }, status: :unprocessable_entity
       end
     rescue ActiveRecord::RecordNotFound => e
       Rails.logger.error("Request not found: #{e.message}")
