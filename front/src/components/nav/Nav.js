@@ -11,7 +11,7 @@ const Nav = ({ currUser, setCurrUser, setShow }) => {
     };
 
     return (
-        <nav className="bg-primary p-4 md:p-8">
+        <nav className="bg-primary p-4 md:p-8 z-50 relative">
             <div className="container mx-auto flex justify-between items-center">
                 <div className="text-white text-xl font-bold">
                     GoodNeighbour 💗
@@ -68,7 +68,7 @@ const Nav = ({ currUser, setCurrUser, setShow }) => {
                                 Profile
                             </Link>
                             <Link
-                                to="/request" // (check on requests/new)
+                                to="/request" // TODO: check on requests/new
                                 className="text-white hover:text-gray-200"
                             >
                                 Make a request
@@ -95,7 +95,7 @@ const Nav = ({ currUser, setCurrUser, setShow }) => {
                     )}
                 </div>
                 {isOpen && (
-                    <div className="md:hidden absolute top-16 right-0 left-0 bg-primary">
+                    <div className="md:hidden absolute top-16 right-0 left-0 bg-primary z-50">
                         <div className="flex flex-col items-center">
                             {currUser && (
                                 <>
@@ -124,10 +124,16 @@ const Nav = ({ currUser, setCurrUser, setShow }) => {
                                         Contact
                                     </Link>
                                     <Link
-                                        to="/request/new"
+                                        to="/request" // TODO: check on requests/new
                                         className="text-white py-2 hover:text-gray-200"
                                     >
                                         Make a request
+                                    </Link>
+                                    <Link
+                                        to="/messages"
+                                        className="text-white py-2 hover:text-gray-200"
+                                    >
+                                        Messages
                                     </Link>
                                     <button
                                         onClick={handleLogout}
