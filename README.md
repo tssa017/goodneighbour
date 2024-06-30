@@ -152,7 +152,7 @@ rails test
 ### To run front tests, use the following command in your terminal:
 
 ```bash
-npx jest
+npm test
 ```
 
 ## Acknowledgments
