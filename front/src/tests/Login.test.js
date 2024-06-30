@@ -20,7 +20,7 @@ describe('Login Component', () => {
 
         render(<Login setCurrUser={mockSetCurrUser} />);
 
-        // Fill out the form
+        // Fill out form
         fireEvent.change(screen.getByLabelText('Email'), {
             target: { value: 'john.doe@example.com' },
         });
@@ -28,10 +28,10 @@ describe('Login Component', () => {
             target: { value: 'password' },
         });
 
-        // Submit the form
+        // Submit
         fireEvent.submit(screen.getByRole('button', { name: 'Login' }));
 
-        // Wait for the redirect or any other async action
+        // Wait for redirect
         await waitFor(() => {
             expect(mockSetCurrUser).toHaveBeenCalledWith({
                 id: 1,
@@ -52,7 +52,7 @@ describe('Login Component', () => {
 
         render(<Login setCurrUser={mockSetCurrUser} />);
 
-        // Fill out the form with invalid credentials
+        // Fill out form with invalid credentials
         fireEvent.change(screen.getByLabelText('Email'), {
             target: { value: 'invalid.user@example.com' },
         });
@@ -60,13 +60,12 @@ describe('Login Component', () => {
             target: { value: 'invalidPassword' },
         });
 
-        // Submit the form
+        // Submit
         fireEvent.submit(screen.getByRole('button', { name: 'Login' }));
 
-        // Wait for the error message
+        // Wait for error
         await screen.findByText('Invalid credentials. Try signing up first.');
 
-        // Assertions
         expect(mockSetCurrUser).not.toHaveBeenCalled();
         expect(window.localStorage.getItem('token')).toBeNull();
         expect(window.location.pathname).not.toBe('/home');
@@ -77,10 +76,9 @@ describe('Login Component', () => {
 
         render(<Login setShow={mockSetShow} />);
 
-        // Click on the "Sign up here" button
+        // Click on sign up button
         fireEvent.click(screen.getByText('Sign up here'));
 
-        // Assertions
         expect(mockSetShow).toHaveBeenCalledWith(false);
     });
 });

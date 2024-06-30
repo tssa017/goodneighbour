@@ -21,7 +21,7 @@ const OverlayWindow = ({ request, currUser, onClose }) => {
             navigate('/messages', {
                 state: { activeChat: response.data, request: request },
             });
-            onClose(); // Close the overlay after successful submission
+            onClose();
         } catch (error) {
             console.error('Error submitting request:', error);
             setErrorMessage(error.response.data.details);

@@ -22,7 +22,7 @@ const Login = ({ setCurrUser, setShow }) => {
                 response.headers.get('Authorization')
             );
             setCurrUser(data);
-            navigate('/home'); // Redirect to /home after successful login
+            navigate('/home');
         } catch (error) {
             console.log('error', error);
             if (error.response && error.response.status === 401) {

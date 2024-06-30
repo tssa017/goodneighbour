@@ -17,7 +17,7 @@ const MessageSender = ({ currChat, currUser, setRefreshMessages }) => {
                     content: messageContent,
                 },
             });
-            setRefreshMessages(true); // Set to true to trigger message fetch
+            setRefreshMessages(true);
             setMessageContent('');
         } catch (error) {
             console.error('Error sending message:', error);

@@ -10,7 +10,7 @@ describe('Signup Component', () => {
 
         render(<Signup setCurrUser={mockSetCurrUser} setShow={mockSetShow} />);
 
-        // Fill out the form
+        // Fill out form
         fireEvent.change(screen.getByLabelText('First name'), {
             target: { value: 'John' },
         });
@@ -27,13 +27,10 @@ describe('Signup Component', () => {
             target: { value: 'password' },
         });
 
-        // Submit the form
+        // Submit
         fireEvent.submit(screen.getByRole('button', { name: 'Submit ✨' }));
 
-        // Wait for the form submission
         await screen.findByText('Once you have signed up');
-
-        // Assertions
         expect(mockSetCurrUser).toHaveBeenCalled();
         expect(mockSetShow).not.toHaveBeenCalled();
     });
@@ -43,19 +40,18 @@ describe('Signup Component', () => {
 
         // Fill out the form with mismatched passwords
         fireEvent.change(screen.getByLabelText('Password'), {
-            target: { value: 'password' },
+            target: { value: 'poo' },
         });
         fireEvent.change(screen.getByLabelText('Confirm Password'), {
-            target: { value: 'password123' }, // Different password
+            target: { value: 'poo123' },
         });
 
-        // Submit the form
+        // Submit
         fireEvent.submit(screen.getByRole('button', { name: 'Submit ✨' }));
 
-        // Wait for the error message
+        // Wait for the error
         await screen.findByText('Passwords do not match');
 
-        // Assertions
         expect(screen.getByText('Passwords do not match')).toBeInTheDocument();
     });
 
@@ -64,10 +60,9 @@ describe('Signup Component', () => {
 
         render(<Signup setShow={mockSetShow} />);
 
-        // Click on the login link
+        // Click on the login btn
         fireEvent.click(screen.getByText('Login here'));
 
-        // Assertions
         expect(mockSetShow).toHaveBeenCalledWith(true);
     });
 });

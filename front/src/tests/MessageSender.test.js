@@ -74,7 +74,6 @@ describe('MessageSender Component', () => {
             }
         );
 
-        // Wait for the state update
         await screen.findByText('Send message ✨');
         expect(setRefreshMessages).toHaveBeenCalledWith(true);
         expect(textarea.value).toBe('');
@@ -101,7 +100,6 @@ describe('MessageSender Component', () => {
 
         expect(submitButton).toHaveTextContent('Sending...');
 
-        // Wait for the state update
         await screen.findByText('Send message ✨');
         expect(submitButton).toHaveTextContent('Send message ✨');
     });

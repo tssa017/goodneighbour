@@ -18,7 +18,7 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
-    # Useful to avoid overlapping task and it is also privacy preserving
+    # Useful to avoid overlapping tasks and + privacy preserving
     @request.latitude += 2e-3 * Random.rand(-1.0...1.0)
     @request.longitude += 2e-3 * Random.rand(-1.0...1.0)
 

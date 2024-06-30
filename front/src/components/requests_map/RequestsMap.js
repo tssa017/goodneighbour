@@ -30,9 +30,9 @@ const RequestMap = ({ currUser }) => {
             }
         };
 
-        const interval = setInterval(fetchRequests, 5000); // Fetch requests every 5 seconds
+        const interval = setInterval(fetchRequests, 5000); // For the unfulfilled requests trqcker: fetch requests every 5 seconds 💪
 
-        return () => clearInterval(interval); // Cleanup interval on component unmount
+        return () => clearInterval(interval);
     }, []);
 
     if (!currUser) {
