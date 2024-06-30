@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+// Custom components used for displaying markers and legends on the map
 import RequestMarker from './RequestMarker';
 import MarkerLegend from './MarkerLegend';
-import useGeoLocation from '../geolocation/Geolocation';
-import { Map, APIProvider } from '@vis.gl/react-google-maps';
+import useGeoLocation from '../geolocation/Geolocation'; // Custom hook for fetching the current geolocation of the user
+import { Map, APIProvider } from '@vis.gl/react-google-maps'; // For integrating Google Maps into the application
 
 const mapContainerStyle = {
     width: '100%',
@@ -11,13 +12,14 @@ const mapContainerStyle = {
 };
 
 const RequestMap = ({ currUser }) => {
-    const [requests, setRequests] = useState([]);
-    const { lat, lon } = useGeoLocation();
+    const [requests, setRequests] = useState([]); // To hold the list of requests fetched from the server
+    const { lat, lon } = useGeoLocation(); // Retrieves the current latitude + longitude
     const center = {
         lat: lat,
         lng: lon,
     };
 
+    // Fetch requests
     useEffect(() => {
         const fetchRequests = async () => {
             try {
@@ -30,15 +32,17 @@ const RequestMap = ({ currUser }) => {
             }
         };
 
-        const interval = setInterval(fetchRequests, 5000); // For the unfulfilled requests trqcker: fetch requests every 5 seconds 💪
+        const interval = setInterval(fetchRequests, 5000); // For the unfulfilled requests tracker: fetch requests every 5 seconds 💪
 
-        return () => clearInterval(interval);
+        return () => clearInterval(interval); // Ensures request doesn't keep running in background when component unmounts
     }, []);
 
+    // Only display results if from current user
     if (!currUser) {
         return null;
     }
 
+    // Filters requests array to count # of requests (with a status other than 'closed'), indicating unfulfilled requests in the tracker
     const unfulfilledRequestsCount = requests.filter(
         (request) => request.status !== 'closed'
     ).length;
@@ -57,6 +61,7 @@ const RequestMap = ({ currUser }) => {
                         defaultZoom={10}
                         gestureHandling={'greedy'}
                     >
+                        {/* Conditionally render RequestMarker components for each visible request where `request.hidden` = false */}
                         {requests.map((request) => (
                             <div key={request.id}>
                                 {request.hidden === false ? (

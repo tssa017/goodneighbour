@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const RequestList = ({ currUser }) => {
-    const [requests, setRequests] = useState([]);
-    const [activeTab, setActiveTab] = useState('open');
-    const [expandedRequestIds, setExpandedRequestIds] = useState([]);
+    const [requests, setRequests] = useState([]); // Holds the array of user requests fetched from the server
+    const [activeTab, setActiveTab] = useState('open'); // Check which tab is open or closed
+    const [expandedRequestIds, setExpandedRequestIds] = useState([]); // Stores IDs of requests whose descriptions are expanded to show more details
 
     useEffect(() => {
         const fetchRequests = async () => {
@@ -18,6 +18,7 @@ const RequestList = ({ currUser }) => {
             }
         };
 
+        // Runs whenever `currUser` changes
         if (currUser) {
             fetchRequests();
         }
@@ -27,6 +28,7 @@ const RequestList = ({ currUser }) => {
         return null;
     }
 
+    // Toggle view based on state of a request (closed or open)
     const handleRequestAction = async (requestId, action) => {
         try {
             const response = await axios.put(

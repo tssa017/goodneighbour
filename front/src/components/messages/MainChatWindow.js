@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-import MessageSender from './MessageSender';
-import MessagesChannel from './MessagesChannel';
+import MessageSender from './MessageSender'; // For message submission
+import MessagesChannel from './MessagesChannel'; // For displaying the messages
 
 const MainChatWindow = ({ currUser }) => {
-    const location = useLocation();
+    const location = useLocation(); // Current location from react router dom
+    // Stored data indicates if a message was from a requester or sender
     const [chatsAsAnswerer, setChatsAsAnswerer] = useState([]);
     const [chatsAsRequester, setChatsAsRequester] = useState([]);
     const [activeTab, setActiveTab] = useState('answerer');
@@ -13,7 +14,9 @@ const MainChatWindow = ({ currUser }) => {
     const [selectedUser, setSelectedUser] = useState(null);
     const [activeChat, setActiveChat] = useState(null);
     const [selectedUserId, setSelectedUserId] = useState(null);
-    const [refreshMessages, setRefreshMessages] = useState(true);
+    const [refreshMessages, setRefreshMessages] = useState(true); // Trigger refresh message
+
+    // Track the selected request, user, and active cha
     const [showRequests, setShowRequests] = useState(false);
     const [showUsersList, setShowUsersList] = useState(false);
 
@@ -46,6 +49,7 @@ const MainChatWindow = ({ currUser }) => {
         }
     }, [location.state]);
 
+    // Updates `selectedUser` based on `selectedUserId` and `selectedRequestTitle`
     useEffect(() => {
         if (selectedUserId && selectedRequestTitle) {
             const chatsForSelectedRequest =
@@ -73,6 +77,7 @@ const MainChatWindow = ({ currUser }) => {
         chatsAsRequester,
     ]);
 
+    // Clicking a request title updates the state and shows the users list
     const renderRequestList = () => {
         const requests =
             activeTab === 'answerer'
@@ -111,6 +116,7 @@ const MainChatWindow = ({ currUser }) => {
         );
     };
 
+    // Clicking a user updates the state and fetches chat data for the selected user
     const renderUsersList = () => {
         if (!selectedRequestTitle || !showUsersList) return null;
 
@@ -156,6 +162,7 @@ const MainChatWindow = ({ currUser }) => {
         );
     };
 
+    // Fetches chat data for the selected user and updates the state
     const handleUserSelection = async (user) => {
         try {
             if (!selectedRequestTitle) {

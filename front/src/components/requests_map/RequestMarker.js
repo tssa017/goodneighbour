@@ -5,12 +5,12 @@ import {
     useAdvancedMarkerRef,
     Pin,
 } from '@vis.gl/react-google-maps';
-import OverlayWindow from './OverlayWindow';
+import OverlayWindow from './OverlayWindow'; // For users to check if they really want to respond to the aid request
 
 const RequestMarker = ({ request, currUser }) => {
-    const [infowindowOpen, setInfowindowOpen] = useState(false);
-    const [markerRef, marker] = useAdvancedMarkerRef();
-    const [showOverlay, setShowOverlay] = useState(false);
+    const [infowindowOpen, setInfowindowOpen] = useState(false); // Tracks if the info window associated with the marker is open or closed
+    const [markerRef, marker] = useAdvancedMarkerRef(); // Get a reference to the advanced marker + its corresponding DOM element
+    const [showOverlay, setShowOverlay] = useState(false); //  Controls whether the overlay should be displayed
 
     const handleProposeClick = () => {
         setShowOverlay(true);
@@ -25,6 +25,7 @@ const RequestMarker = ({ request, currUser }) => {
         return null;
     }
 
+    // This function controls pin colors based on who made the request
     const getPinStyles = () => {
         const isNewOrReopened =
             request.status === 'new' || request.status === 'reopened';
