@@ -46,7 +46,6 @@ const RequestMap = ({ currUser }) => {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-light pt-4 pb-12">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full">
-                <MarkerLegend />
                 <APIProvider
                     apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
                     // libraries={libraries}
@@ -70,6 +69,7 @@ const RequestMap = ({ currUser }) => {
                         ))}
                     </Map>
                 </APIProvider>
+                <MarkerLegend />
                 <h2 className="text-2xl p-8 font-bold bg-secondary text-white text-center mb-6">
                     Unfulfilled requests count: {unfulfilledRequestsCount}
                 </h2>

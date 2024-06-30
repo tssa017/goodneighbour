@@ -19,7 +19,6 @@ const mapContainerStyle = {
     height: '400px',
 };
 
-
 const RequestForm = ({ currUser }) => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -62,7 +61,6 @@ const RequestForm = ({ currUser }) => {
         setLocationError('');
     };
 
-
     const onMarkerDragEnd = (event) => {
         setLatitude(event.latLng.lat());
         setLongitude(event.latLng.lng());
@@ -75,7 +73,7 @@ const RequestForm = ({ currUser }) => {
     return (
         <div className="min-h-screen flex flex-col items-center bg-light py-4">
             <h2 className="text-4xl font-bold text-primary text-center mb-6">
-                Create a request
+                Create an aid request
             </h2>
             <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -133,32 +131,45 @@ const RequestForm = ({ currUser }) => {
                             {locationError}
                         </div>
                     )}
+                    <p className="text-left text-sm pb-2 pt-8">
+                        ℹ️{' '}
+                        <em>
+                            Enter an address or drag and drop the marker to your
+                            exact location!
+                        </em>
+                    </p>
                     <div>
                         <APIProvider
-                        apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-                        libraries={["places"]}
+                            apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+                            libraries={['places']}
                         >
-                        <MapControl position={ControlPosition.TOP}>
-                            <div className="autocomplete-control w-full rounded-lg">
-                                <PlaceAutocomplete onPlaceSelect={setSelectedPlace} />
-                            </div>
-                        </MapControl>
-                        <Map
-                            mapId={'bf51a92d020fa25b'}
-                            style={mapContainerStyle}
-                            defaultZoom={15}
-                            center={{lat: latitude, lng: longitude}}
-                            gestureHandling={'greedy'}
-                            disableDefaultUI={true}
-                        >
-                            <Marker
-                                position={{ lat: latitude, lng: longitude }}
-                                draggable={true}
-                                onDragEnd={onMarkerDragEnd}
-                             />
-                        </Map>
-                        <MapHandler place={selectedPlace} setLatitude={setLatitude} setLongitude={setLongitude} />
-                    </APIProvider>
+                            <MapControl position={ControlPosition.TOP}>
+                                <div className="autocomplete-control w-full rounded-lg">
+                                    <PlaceAutocomplete
+                                        onPlaceSelect={setSelectedPlace}
+                                    />
+                                </div>
+                            </MapControl>
+                            <Map
+                                mapId={'bf51a92d020fa25b'}
+                                style={mapContainerStyle}
+                                defaultZoom={15}
+                                center={{ lat: latitude, lng: longitude }}
+                                gestureHandling={'greedy'}
+                                disableDefaultUI={true}
+                            >
+                                <Marker
+                                    position={{ lat: latitude, lng: longitude }}
+                                    draggable={true}
+                                    onDragEnd={onMarkerDragEnd}
+                                />
+                            </Map>
+                            <MapHandler
+                                place={selectedPlace}
+                                setLatitude={setLatitude}
+                                setLongitude={setLongitude}
+                            />
+                        </APIProvider>
                     </div>
                     <button
                         type="submit"

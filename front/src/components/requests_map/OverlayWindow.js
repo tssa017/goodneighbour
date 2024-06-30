@@ -33,8 +33,6 @@ const OverlayWindow = ({ request, currUser, onClose }) => {
             <div className="bg-white p-8 rounded-lg shadow-lg">
                 <h2 className="text-2xl font-bold mb-4">{request.title}</h2>
                 <p className="text-lg mb-4">{request.description}</p>
-                <p className="text-gray-600 mb-4">User ID: {request.user_id}</p>
-                <p className="text-gray-600 mb-4">Request ID: {request.id}</p>
 
                 <p className="mb-4">
                     Are you sure you want to answer this request?
