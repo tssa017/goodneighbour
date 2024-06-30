@@ -187,8 +187,26 @@ const MainChatWindow = ({ currUser }) => {
     return (
         <div className="max-w-4xl mx-auto py-10 my-10 flex flex-col items-center justify-center">
             <h1 className="text-2xl font-black text-primary mb-8">
-                Send a secure message to your hero or your requesters 💬
+                Welcome to the secure message portal 💬
             </h1>
+            <div className="pb-10 text-md text-left">
+                {' '}
+                <p className="pt-2">
+                    ℹ️ <strong>To get started</strong>, follow these steps!
+                </p>
+                <p className="pt-4">
+                    <strong>1.</strong> Select either your aid missions or your
+                    aid requests tab
+                </p>
+                <p className="py-2">
+                    <strong>2.</strong> Select the target request
+                </p>
+                <p className="pb-8">
+                    <strong>3.</strong> Select the user you want to communicate
+                    with, and get chatting!
+                </p>
+            </div>
+
             <div className="mb-4">
                 <button
                     onClick={() => {

@@ -75,7 +75,7 @@ const RequestForm = ({ currUser }) => {
             <h2 className="text-4xl font-bold text-primary text-center mb-6">
                 Create an aid request
             </h2>
-            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-4xl mb-10">
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label

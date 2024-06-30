@@ -66,32 +66,40 @@ const RequestList = ({ currUser }) => {
         <table className="min-w-full bg-white">
             <thead>
                 <tr>
-                    <th className="py-2 px-4 border-b">Title</th>
-                    <th className="py-2 px-4 border-b">Description</th>
-                    <th className="py-2 px-4 border-b">Status</th>
-                    <th className="py-2 px-4 border-b">Proposals Count</th>
-                    <th className="py-2 px-4 border-b">Actions</th>
+                    <th className="py-2 px-4 border-b text-left">Title</th>
+                    <th className="py-2 px-4 border-b text-left">
+                        Description
+                    </th>
+                    <th className="py-2 px-4 border-b text-left">Status</th>
+                    <th className="py-2 px-4 border-b text-left">
+                        Proposals Count
+                    </th>
+                    <th className="py-2 px-4 border-b text-left">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {requests.map((request) => (
                     <tr key={request.id}>
-                        <td className="py-2 px-4 border-b">{request.title}</td>
-                        <td className="py-2 px-4 border-b">
+                        <td className="py-2 px-4 border-b text-left">
+                            {request.title}
+                        </td>
+                        <td className="py-2 px-4 border-b text-left">
                             {expandedRequestIds.includes(request.id)
                                 ? request.description
                                 : `${request.description.substring(0, 50)}... `}
                             <button
                                 onClick={() => toggleDescription(request.id)}
-                                className="text-blue-500 underline"
+                                className="text-primary underline ml-2"
                             >
                                 {expandedRequestIds.includes(request.id)
                                     ? 'See less'
                                     : 'See more'}
                             </button>
                         </td>
-                        <td className="py-2 px-4 border-b">{request.status}</td>
-                        <td className="py-2 px-4 border-b">
+                        <td className="py-2 px-4 border-b text-left">
+                            {request.status}
+                        </td>
+                        <td className="py-2 px-4 border-b text-left">
                             {request.proposals_count}
                         </td>
                         <td className="py-2 px-4 border-b">
@@ -100,7 +108,7 @@ const RequestList = ({ currUser }) => {
                                     onClick={() =>
                                         handleRequestAction(request.id, 'close')
                                     }
-                                    className="bg-red-500 text-white px-4 py-1 rounded"
+                                    className="bg-dark text-white px-4 py-1 rounded font-bold"
                                 >
                                     Close this request
                                 </button>
@@ -125,22 +133,30 @@ const RequestList = ({ currUser }) => {
     );
 
     return (
-        <div className="min-h-screen flex flex-col items-center justify-center bg-light pt-4 pb-12">
+        <div className="min-h-screen flex flex-col items-center justify-center bg-light py-12">
             <h2 className="text-4xl font-bold text-primary text-center mb-6">
-                Your Requests
+                Your requests
             </h2>
-            <div className="tabs">
+            <div className="flex space-x-4 mb-6">
                 <button
                     onClick={() => setActiveTab('open')}
-                    className={`tab ${activeTab === 'open' ? 'active' : ''}`}
+                    className={`px-4 py-2 rounded font-bold ${
+                        activeTab === 'open'
+                            ? 'bg-primary text-white'
+                            : 'bg-gray-400 text-white'
+                    }`}
                 >
-                    Open Requests
+                    Open requests
                 </button>
                 <button
                     onClick={() => setActiveTab('closed')}
-                    className={`tab ${activeTab === 'closed' ? 'active' : ''}`}
+                    className={`px-4 py-2 rounded font-bold ${
+                        activeTab === 'closed'
+                            ? 'bg-primary text-white'
+                            : 'bg-gray-400 text-white'
+                    }`}
                 >
-                    Closed Requests
+                    Closed requests
                 </button>
             </div>
             <div className="w-full max-w-4xl">

@@ -10,7 +10,14 @@ const MarkerLegend = () => {
                         <div className="w-6 h-6 rounded-full bg-red-500"></div>
                         <div className="absolute top-1/2 left-1/2 w-3 h-3 rounded-full bg-purple-500 transform -translate-x-1/2 -translate-y-1/2"></div>
                     </div>
-                    <span>My own request</span>
+                    <span>My own task request</span>
+                </div>
+                <div className="flex items-center">
+                    <div className="relative w-6 h-6 mr-2">
+                        <div className="w-6 h-6 rounded-full bg-cyan-400"></div>
+                        <div className="absolute top-1/2 left-1/2 w-3 h-3 rounded-full bg-purple-500 transform -translate-x-1/2 -translate-y-1/2"></div>
+                    </div>
+                    <span>My own material request</span>
                 </div>
                 <div className="flex items-center">
                     <div className="relative w-6 h-6 mr-2">
