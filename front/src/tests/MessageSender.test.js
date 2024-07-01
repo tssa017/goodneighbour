@@ -64,7 +64,7 @@ describe('MessageSender Component', () => {
 
         expect(submitButton).toHaveTextContent('Sending...');
         expect(axios.post).toHaveBeenCalledWith(
-            'http://localhost:3000/messages',
+            `${process.env.REACT_APP_BACKEND_URL}/messages`,
             {
                 message: {
                     chat_id: currChat.id,

@@ -8,7 +8,7 @@ const MessagesChannel = ({ currChat, currUser, refreshMessages }) => {
         const fetchMessages = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/messages?chat_id=${currChat.id}` // Retrieve messages from server based on user ID
+                    `${process.env.REACT_APP_BACKEND_URL}/messages?chat_id=${currChat.id}` // Retrieve messages from server based on user ID
                 );
                 // Order messages by time received, if no messages, return 'No messages here' txt
                 const sortedMessages = response.data.messages.sort(

@@ -14,7 +14,7 @@ const OverlayWindow = ({ request, currUser, onClose }) => {
     const handleClickSubmitRequest = async () => {
         try {
             const response = await axios.post(
-                'http://localhost:3000/requests/answer_request',
+                `${process.env.REACT_APP_BACKEND_URL}/requests/answer_request`,
                 {
                     answerer_id: currUser.id,
                     request_id: request.id,

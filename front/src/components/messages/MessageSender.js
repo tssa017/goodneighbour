@@ -10,7 +10,7 @@ const MessageSender = ({ currChat, currUser, setRefreshMessages }) => {
         setSubmitting(true);
 
         try {
-            await axios.post('http://localhost:3000/messages', {
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/messages`, {
                 message: {
                     chat_id: currChat.id,
                     user_id: currUser.id,

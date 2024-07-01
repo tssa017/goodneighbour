@@ -8,7 +8,7 @@ const Signup = ({ setCurrUser, setShow }) => {
 
     // Send form data to the backend server for user signup
     const signup = async (formData, setCurrUser) => {
-        const url = 'http://localhost:3000/signup';
+        const url = `${process.env.REACT_APP_BACKEND_URL}/signup`;
         try {
             const response = await axios.post(url, formData, {
                 headers: {

@@ -8,7 +8,7 @@ const Login = ({ setCurrUser, setShow }) => {
     const navigate = useNavigate();
 
     const login = async (userInfo, setCurrUser) => {
-        const url = 'http://localhost:3000/login';
+        const url = `${process.env.REACT_APP_BACKEND_URL}/login`;
         try {
             const response = await axios.post(url, userInfo, {
                 headers: {

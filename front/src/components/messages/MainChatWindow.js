@@ -25,7 +25,7 @@ const MainChatWindow = ({ currUser }) => {
         const fetchChats = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/chats?user_id=${currUser.id}`
+                    `${process.env.REACT_APP_BACKEND_URL}/chats?user_id=${currUser.id}`
                 );
                 const { answerer, requester } = response.data;
                 setChatsAsAnswerer(answerer);
@@ -174,7 +174,7 @@ const MainChatWindow = ({ currUser }) => {
             }
 
             const response = await axios.get(
-                `http://localhost:3000/chats/chat?user_id=${currUser.id}&receiver_id=${user.receiver.id}&request_id=${user.request_id}`
+                `${process.env.REACT_APP_BACKEND_URL}/chats/chat?user_id=${currUser.id}&receiver_id=${user.receiver.id}&request_id=${user.request_id}`
             );
 
             setActiveChat(response.data.chat[0]);

@@ -10,7 +10,7 @@ const RequestList = ({ currUser }) => {
         const fetchRequests = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/requests/user_request?user_id=${currUser.id}`
+                    `${process.env.REACT_APP_BACKEND_URL}/requests/user_request?user_id=${currUser.id}`
                 );
                 setRequests(response.data);
             } catch (error) {
@@ -32,7 +32,7 @@ const RequestList = ({ currUser }) => {
     const handleRequestAction = async (requestId, action) => {
         try {
             const response = await axios.put(
-                `http://localhost:3000/requests/${action}?id=${requestId}`
+                `${process.env.REACT_APP_BACKEND_URL}/requests/${action}?id=${requestId}`
             );
             setRequests(
                 requests.map((request) =>

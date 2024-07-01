@@ -4,7 +4,7 @@ const Logout = ({ setCurrUser }) => {
     const logout = async (setCurrUser) => {
         try {
             const response = await axios.delete(
-                'http://localhost:3000/logout',
+                `${process.env.REACT_APP_BACKEND_URL}/logout`,
                 {
                     headers: {
                         'Content-Type': 'application/json',

@@ -24,7 +24,7 @@ const RequestMap = ({ currUser }) => {
         const fetchRequests = async () => {
             try {
                 const response = await axios.get(
-                    'http://localhost:3000/requests'
+                    `${process.env.REACT_APP_BACKEND_URL}/requests`
                 );
                 setRequests(response.data);
             } catch (error) {

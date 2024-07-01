@@ -45,7 +45,7 @@ const RequestForm = ({ currUser }) => {
 
         try {
             const response = await axios.post(
-                'http://localhost:3000/requests',
+                `${process.env.REACT_APP_BACKEND_URL}/requests`,
                 {
                     request: {
                         user_id: currUser.id,
