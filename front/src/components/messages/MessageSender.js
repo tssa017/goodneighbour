@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 const MessageSender = ({ currChat, currUser, setRefreshMessages }) => {
-    const [messageContent, setMessageContent] = useState('');
-    const [submitting, setSubmitting] = useState(false);
+    const [messageContent, setMessageContent] = useState(''); // Manage message content
+    const [submitting, setSubmitting] = useState(false); // Tracks whether a message submission is currently in progress (true when submitting, false otherwise) so that you get a nifty 'sending...' message while message is being sent
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -17,12 +17,12 @@ const MessageSender = ({ currChat, currUser, setRefreshMessages }) => {
                     content: messageContent,
                 },
             });
-            setRefreshMessages(true);
+            setRefreshMessages(true); // Trigger a refresh of the messages in the chat
             setMessageContent('');
         } catch (error) {
             console.error('Error sending message:', error);
         } finally {
-            setSubmitting(false);
+            setSubmitting(false); // When message has sent, stop the `sending...` message
         }
     };
 

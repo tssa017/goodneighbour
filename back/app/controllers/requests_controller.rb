@@ -1,16 +1,16 @@
 class RequestsController < ApplicationController
-  # before_action :authenticate_user!, except: [:index, :show]
-
   def index
     @requests = Request.all
     render json: @requests
   end
 
+  # Retrieve specific request by ID
   def show
     @request = Request.find(params[:id])
     render json: @request
   end
 
+  # Retrieve specific User by ID
   def user_request
     @request = Request.where(user_id: params[:user_id])
     render json: @request
@@ -18,7 +18,7 @@ class RequestsController < ApplicationController
 
   def create
     @request = Request.new(request_params)
-    # Useful to avoid overlapping tasks and + privacy preserving
+    # Modifies long + lat SLIGHTLY to avoid overlapping tasks and for privacy
     @request.latitude += 2e-3 * Random.rand(-1.0...1.0)
     @request.longitude += 2e-3 * Random.rand(-1.0...1.0)
 
@@ -30,6 +30,7 @@ class RequestsController < ApplicationController
     end
   end
 
+  # Handles the process of answering a request by creating a new `Chat` and updating the request's status
   def answer_request
     request_id = params[:request_id]
     answerer_id = params[:answerer_id]

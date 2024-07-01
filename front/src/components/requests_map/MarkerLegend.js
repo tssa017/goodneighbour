@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Render a key / legend to indicate which colour of marker corresponds to which type of request
 const MarkerLegend = () => {
     return (
         <div className="pb-10">

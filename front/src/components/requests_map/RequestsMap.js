@@ -50,10 +50,7 @@ const RequestMap = ({ currUser }) => {
     return (
         <div className="min-h-screen flex flex-col items-center justify-center bg-light pt-4 pb-12">
             <div className="bg-white p-8 rounded-lg shadow-lg w-full">
-                <APIProvider
-                    apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-                    // libraries={libraries}
-                >
+                <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
                     <Map
                         mapId={'bf51a92d020fa25a'}
                         style={mapContainerStyle}

@@ -2,9 +2,11 @@ import { useRef, useState } from 'react';
 import axios from 'axios';
 
 const Signup = ({ setCurrUser, setShow }) => {
-    const formRef = useRef();
-    const [passwordError, setPasswordError] = useState('');
+    // Props: set the current user after a successful signup + toggle the display between signup and login forms
+    const formRef = useRef(); // Creates a reference to the form element (to access the form data)
+    const [passwordError, setPasswordError] = useState(''); // State to store any password mismatch errors
 
+    // Send form data to the backend server for user signup
     const signup = async (formData, setCurrUser) => {
         const url = 'http://localhost:3000/signup';
         try {
@@ -18,30 +20,33 @@ const Signup = ({ setCurrUser, setShow }) => {
                 'token',
                 response.headers.get('Authorization')
             );
-            setCurrUser(data);
+            setCurrUser(data); // On success, this function stores the token in localStorage and sets the current user
         } catch (error) {
             console.log('error', error);
         }
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        const formData = new FormData(formRef.current);
+        e.preventDefault(); // Prevent page refresh (React best practices)
+        const formData = new FormData(formRef.current); // `current` refers to the DOM node
         const password = formData.get('password');
-        const passwordConfirmation = formData.get('password_confirmation');
+        const passwordConfirmation = formData.get('password_confirmation'); // Check that passwords match
 
+        // Handle mismatch errors
         if (password !== passwordConfirmation) {
             setPasswordError('Passwords do not match');
             return;
         }
 
+        // This for loop goes through the key value pairs in the form data submitted and appends to user data
+        // This is done to match the expected structure on the backend where it is being posted (to be stored in db)
         const userFormData = new FormData();
         for (const [key, value] of formData.entries()) {
             userFormData.append(`user[${key}]`, value);
         }
 
         signup(userFormData, setCurrUser);
-        e.target.reset();
+        e.target.reset(); // Reset the form upon successful submission
         setPasswordError('');
     };
 
@@ -60,6 +65,7 @@ const Signup = ({ setCurrUser, setShow }) => {
                 <h2 className="mb-4 text-4xl font-semibold text-center text-primary">
                     Sign up
                 </h2>
+                {/* Help users navigate the site */}
                 <p className="py-4 text-sm text-left">
                     Once you have signed up, please redirect to the log in page!
                 </p>

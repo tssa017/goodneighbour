@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const Login = ({ setCurrUser, setShow }) => {
-    const formRef = useRef();
+    const formRef = useRef(); // Creates a reference to the form element (to access the form data)
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const Login = ({ setCurrUser, setShow }) => {
                 response.headers.get('Authorization')
             );
             setCurrUser(data);
-            navigate('/home');
+            navigate('/home'); // Upon form submission we navigate to the map page directly!
         } catch (error) {
             console.log('error', error);
             if (error.response && error.response.status === 401) {
@@ -39,9 +39,9 @@ const Login = ({ setCurrUser, setShow }) => {
         const data = Object.fromEntries(formData);
         const userInfo = {
             user: { email: data.email, password: data.password },
-        };
+        }; // Ensure posted object is structured to match the expected format for the API request
         login(userInfo, setCurrUser);
-        e.target.reset();
+        e.target.reset(); // Reset form after submission
     };
 
     const handleClick = (e) => {

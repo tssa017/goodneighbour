@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import useGeoLocation from '../geolocation/Geolocation';
+import useGeoLocation from '../geolocation/Geolocation'; // Custom hook (useGeoLocation) to fetch the current user's geographic coordinates (lat and lon)
 
 import {
     Marker,
@@ -31,9 +31,13 @@ const RequestForm = ({ currUser }) => {
     const [selectedPlace, setSelectedPlace] = useState(null);
     const [modalOpen, setModalOpen] = useState(false);
 
+    //
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // Validate latitude + longitude values
+        // First, Checks that the `latitude` is within the valid range of -90 to +90 degrees
+        // Then, check that the `longitude` is within the valid range of -180 to +180 degrees
         if (Math.abs(latitude) > 90.0 || Math.abs(longitude) > 180.0) {
             setLocationError('Latitude or Longitude have wrong values.');
             return;
@@ -61,6 +65,7 @@ const RequestForm = ({ currUser }) => {
         setLocationError('');
     };
 
+    // Update the latitude and longitude states when the marker on the map is dragged to a new position
     const onMarkerDragEnd = (event) => {
         setLatitude(event.latLng.lat());
         setLongitude(event.latLng.lng());
@@ -179,6 +184,7 @@ const RequestForm = ({ currUser }) => {
                     </button>
                 </form>
             </div>
+            {/* Conditionally open a modal that confirms a request has been submitted (on successful submit) */}
             {modalOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full text-center">

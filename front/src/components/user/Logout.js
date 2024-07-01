@@ -12,6 +12,7 @@ const Logout = ({ setCurrUser }) => {
                     },
                 }
             );
+            // Clear token from local storage + set `currUser` status to `null`, immediately logging them out
             localStorage.removeItem('token');
             setCurrUser(null);
         } catch (error) {

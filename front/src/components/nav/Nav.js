@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const Nav = ({ currUser, setCurrUser }) => {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false); // For hamburger menu (mobile view), tracks whether the mobile menu is currently open (true) or closed (false)
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -15,11 +15,15 @@ const Nav = ({ currUser, setCurrUser }) => {
                 <div className="text-white text-xl font-bold">
                     GoodNeighbour 💗
                 </div>
+                {/* Hamburger menu is hidden unless in mobile screen size */}
+                {/* On medium and smaller screen sizes (md:hidden), a hamburger menu button is rendered using `button` element */}
                 <div className="md:hidden">
                     <button
-                        onClick={() => setIsOpen(!isOpen)}
+                        onClick={() => setIsOpen(!isOpen)} // If the menu is closed (`false`), clicking the button sets `isOpen` to `true`, and vice versa
                         className="focus:outline-none text-white"
                     >
+                        {/* The SVG icon inside the button changes based on the `isOpen` state */}
+                        {/* Closed (default) displays the hamburger lines, and open displays the cross that indicates users can cancel out of it */}
                         <svg
                             className="w-6 h-6"
                             fill="none"

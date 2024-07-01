@@ -8,18 +8,19 @@ import MarkerLegend from '../components/requests_map/MarkerLegend';
 import { Map, APIProvider } from '@vis.gl/react-google-maps';
 import useGeoLocation from '../components/geolocation/Geolocation';
 
+// Mock the axios request
 jest.mock('axios');
-jest.mock('../components/RequestMarker', () =>
+jest.mock('../components/requests_map/RequestMarker', () =>
     jest.fn(() => <div>RequestMarker</div>)
 );
-jest.mock('../components/MarkerLegend', () =>
+jest.mock('../components/requests_map/MarkerLegend.js', () =>
     jest.fn(() => <div>MarkerLegend</div>)
 );
 jest.mock('@vis.gl/react-google-maps', () => ({
     Map: jest.fn(({ children }) => <div>{children}</div>),
     APIProvider: jest.fn(({ children }) => <div>{children}</div>),
 }));
-jest.mock('../geolocation/Geolocation', () => jest.fn());
+jest.mock('../components/geolocation/Geolocation.js', () => jest.fn());
 
 describe('RequestMap Component', () => {
     const currUser = { id: 1 };
@@ -29,6 +30,7 @@ describe('RequestMap Component', () => {
         jest.clearAllMocks();
     });
 
+    // Check that map + markers are displayed correctly
     it('renders the map and markers', async () => {
         axios.get.mockResolvedValue({
             data: [
@@ -56,6 +58,7 @@ describe('RequestMap Component', () => {
         expect(screen.queryByText('MarkerLegend')).toBeNull();
     });
 
+    // Test for unfulfilled request counter
     it('fetches requests at regular intervals', async () => {
         jest.useFakeTimers();
 

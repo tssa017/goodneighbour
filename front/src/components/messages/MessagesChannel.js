@@ -2,14 +2,15 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const MessagesChannel = ({ currChat, currUser, refreshMessages }) => {
-    const [messages, setMessages] = useState([]);
+    const [messages, setMessages] = useState([]); // Manage array of messages retrieved from server
 
     useEffect(() => {
         const fetchMessages = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:3000/messages?chat_id=${currChat.id}`
+                    `http://localhost:3000/messages?chat_id=${currChat.id}` // Retrieve messages from server based on user ID
                 );
+                // Order messages by time received, if no messages, return 'No messages here' txt
                 const sortedMessages = response.data.messages.sort(
                     (a, b) => new Date(a.created_at) - new Date(b.created_at)
                 );
@@ -22,7 +23,7 @@ const MessagesChannel = ({ currChat, currUser, refreshMessages }) => {
         if (refreshMessages) {
             fetchMessages();
         }
-    }, [currChat, currUser, refreshMessages]);
+    }, [currChat, currUser, refreshMessages]); // Execute `fetchMessages` fn. whenever there's a change in `currChat`, `currUser`, or `refreshMessages`
 
     const renderMessageList = () => {
         if (messages.length === 0) {

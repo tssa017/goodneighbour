@@ -13,15 +13,18 @@ const RequestMarker = ({ request, currUser }) => {
     const [showOverlay, setShowOverlay] = useState(false); //  Controls whether the overlay should be displayed
 
     const handleProposeClick = () => {
+        // Show the overlay window and hide the info window
         setShowOverlay(true);
         setInfowindowOpen(false);
     };
 
     const handleCloseOverlay = () => {
+        // When users click oput of the overlay
         setShowOverlay(false);
     };
 
     if (request.hidden) {
+        // If the request has been closed by the owner or if more than 5 volunteers have proposed to help, don't show it
         return null;
     }
 
@@ -48,6 +51,7 @@ const RequestMarker = ({ request, currUser }) => {
                 position={{ lat: request.latitude, lng: request.longitude }}
                 title={request.title}
             >
+                {/* Set the pin styles based on previous function */}
                 <Pin
                     background={pinStyles.background}
                     borderColor={pinStyles.borderColor}

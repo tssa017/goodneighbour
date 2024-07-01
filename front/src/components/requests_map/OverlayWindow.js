@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+// Props:
+// `request`: request object (in which user is confirming their response)
+// `currUser`: represent currUser - who intends to respond to the request
+// `onClose`: callback function to `close` the overlay window
 const OverlayWindow = ({ request, currUser, onClose }) => {
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
 
+    // Triggered when the user clicks the "Yes" button!
     const handleClickSubmitRequest = async () => {
         try {
             const response = await axios.post(
@@ -18,6 +23,7 @@ const OverlayWindow = ({ request, currUser, onClose }) => {
             );
             console.log('Request submitted successfully:', response.data);
 
+            // Redirect to messages portal so user can start convo with the aid requester + obviously close the overlay
             navigate('/messages', {
                 state: { activeChat: response.data, request: request },
             });

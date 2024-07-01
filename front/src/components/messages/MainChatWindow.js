@@ -7,19 +7,20 @@ import MessagesChannel from './MessagesChannel'; // For displaying the messages
 const MainChatWindow = ({ currUser }) => {
     const location = useLocation(); // Current location from react router dom
     // Stored data indicates if a message was from a requester or sender
-    const [chatsAsAnswerer, setChatsAsAnswerer] = useState([]);
+    const [chatsAsAnswerer, setChatsAsAnswerer] = useState([]); // Store chat data categorized by whether the current user is an `answerer` or `requester`!
     const [chatsAsRequester, setChatsAsRequester] = useState([]);
-    const [activeTab, setActiveTab] = useState('answerer');
+    const [activeTab, setActiveTab] = useState('answerer'); // Trqck which tab is currently active
     const [selectedRequestTitle, setSelectedRequestTitle] = useState(null);
     const [selectedUser, setSelectedUser] = useState(null);
-    const [activeChat, setActiveChat] = useState(null);
+    const [activeChat, setActiveChat] = useState(null); // Holds the currently active chat object
     const [selectedUserId, setSelectedUserId] = useState(null);
-    const [refreshMessages, setRefreshMessages] = useState(true); // Trigger refresh message
+    const [refreshMessages, setRefreshMessages] = useState(true); // Controls message refresh triggers
 
-    // Track the selected request, user, and active cha
+    // Track the selected request, user, and active chat
     const [showRequests, setShowRequests] = useState(false);
     const [showUsersList, setShowUsersList] = useState(false);
 
+    // Fetches user-specific chat data (`chatsAsAnswerer` + `chatsAsRequester`) based on `currUser.id` WHEN `currUser` changes
     useEffect(() => {
         const fetchChats = async () => {
             try {
@@ -39,6 +40,8 @@ const MainChatWindow = ({ currUser }) => {
         }
     }, [currUser]);
 
+    // Updates state (`activeChat`, `selectedRequestTitle`, `selectedUserId`, `activeTab`) based on changes in the React Router location state (`location.state`)
+    // Ex: if a user clicks on a different volunteer to view a different chat.
     useEffect(() => {
         if (location.state) {
             const { activeChat, request } = location.state;
