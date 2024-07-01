@@ -93,18 +93,40 @@ Ensure you have the following environment variables set in `config/.env` files i
 The application uses PostgreSQL as the development and production database. Below is the schema definition:
 
 ```ruby
-ActiveRecord::Schema[7.1].define(version: 2024_06_11_164123) do
-  create_table "messages", force: :cascade do |t|
-    t.integer "sender_id", null: false
-    t.integer "receiver_id", null: false
+ActiveRecord::Schema[7.1].define(version: 2024_06_25_221053) do
+  create_table "chats", force: :cascade do |t|
     t.integer "request_id", null: false
+    t.integer "answerer_id", null: false
+    t.integer "requester_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["answerer_id"], name: "index_chats_on_answerer_id"
+    t.index ["request_id", "requester_id", "answerer_id"], name: "unique_requester_answerer", unique: true
+    t.index ["request_id"], name: "index_chats_on_request_id"
+    t.index ["requester_id"], name: "index_chats_on_requester_id"
+  end
+
+  create_table "jwt_denylist", force: :cascade do |t|
+    t.string "jti", null: false
+    t.datetime "exp", null: false
+    t.index ["jti"], name: "index_jwt_denylist_on_jti"
+  end
+
+  create_table "jwt_denylists", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.integer "chat_id", null: false
+    t.integer "user_id", null: false
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["receiver_id"], name: "index_messages_on_receiver_id"
-    t.index ["request_id"], name: "index_messages_on_request_id"
-    t.index ["sender_id"], name: "index_messages_on_sender_id"
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
+
 
   create_table "requests", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -114,6 +136,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_11_164123) do
     t.float "latitude"
     t.float "longitude"
     t.string "status"
+    t.boolean "hidden"
+    t.integer "proposals_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_requests_on_user_id"
@@ -127,16 +151,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_11_164123) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "id_photo"
     t.string "first_name"
     t.string "last_name"
+    t.string "id_photo"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "messages", "receivers"
-  add_foreign_key "messages", "requests"
-  add_foreign_key "messages", "senders"
+  add_foreign_key "chats", "requests"
+  add_foreign_key "chats", "users", column: "answerer_id"
+  add_foreign_key "chats", "users", column: "requester_id"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "messages", "users"
   add_foreign_key "requests", "users"
 end
 ```

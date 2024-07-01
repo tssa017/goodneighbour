@@ -192,7 +192,9 @@ const RequestForm = ({ currUser }) => {
                             Request Submitted
                         </h2>
                         <p className="text-gray-700 mb-4 bg-light">
-                            Your request has been submitted successfully.
+                            Your request has been submitted successfully. You
+                            will now be able to view your marker on the home
+                            page.
                         </p>
                         <Link
                             to="/home"
